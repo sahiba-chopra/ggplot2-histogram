@@ -1,0 +1,16 @@
+VOC <- count(b6p3, "clubVOC") #create frequency table
+
+# plot
+happy <- c("slategray2", "red1") # bar colours
+
+#rename the legend, change the legend position, change text sizes
+
+p <- ggplot(VOC, aes(x = as.factor(clubVOC), y = freq, fill = aboveThreshold)) +
+  geom_bar(aes(fill = aboveThreshold), stat = "identity", width = 0.7) +
+  geom_text(aes(label = freq), size = 7, vjust = -0.3) +
+  scale_fill_manual(" ", values = happy, labels = c(paste("Below Threshold Level", paste(safe, "%", sep=""), sep=": ") , paste("Above Threshold Level", paste(notSafe, "%", sep=""), sep=": "))) +
+  ggtitle("Electronics Lab VOC Levels") 
+
+p + theme_classic() + theme(legend.position = "top", legend.text = element_text(size = 20), 
+                            axis.text = element_text(size = 20), axis.title.y = element_text(size = 20), 
+                            axis.title.x = element_text(size = 20), plot.title = element_text(size = 20)) + xlab("VOC (ppb)") + ylab("Frequency") 
